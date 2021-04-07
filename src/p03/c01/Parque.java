@@ -1,4 +1,4 @@
-package p03.c01;
+package src.p03.c01;
 
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -8,12 +8,14 @@ public class Parque implements IParque{
 	// TODO 
 	private int contadorPersonasTotales;
 	private Hashtable<String, Integer> contadoresPersonasPuerta;
-	
+	private int maximoPersonas; //nuevo
+	private int minimoPersonas=0; //nuevo
 	
 	public Parque() {	// TODO
 		contadorPersonasTotales = 0;
 		contadoresPersonasPuerta = new Hashtable<String, Integer>();
 		// TODO
+		maximoPersonas=40; //nuevo
 	}
 
 
@@ -39,12 +41,18 @@ public class Parque implements IParque{
 		
 		
 		// TODO
+		checkInvariante();
 		
 	}
 	
 	// 
 	// TODO Método salirDelParque
 	//
+	@Override
+	public void salirDelParque(String puerta) { //nuevo
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	private void imprimirInfo (String puerta, String movimiento){
@@ -84,6 +92,9 @@ public class Parque implements IParque{
 		// TODO
 		//
 	}
+
+
+	
 
 
 }
