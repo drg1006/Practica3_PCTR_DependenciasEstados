@@ -19,8 +19,8 @@ public class Parque implements IParque{
 	}
 
 
-	@Override
-	public void entrarAlParque(String puerta){		// TODO
+	@Override //synchronized?
+	public  void entrarAlParque(String puerta){		// TODO
 		
 		// Si no hay entradas por esa puerta, inicializamos
 		if (contadoresPersonasPuerta.get(puerta) == null){
@@ -28,7 +28,7 @@ public class Parque implements IParque{
 		}
 		
 		// TODO
-				
+		comprobarAntesDeEntrar();
 		
 		// Aumentamos el contador total y el individual
 		contadorPersonasTotales++;		
@@ -39,7 +39,6 @@ public class Parque implements IParque{
 		
 		// TODO
 		
-		
 		// TODO
 		checkInvariante();
 		
@@ -48,9 +47,12 @@ public class Parque implements IParque{
 	// 
 	// TODO Método salirDelParque
 	//
-	@Override
-	public void salirDelParque(String puerta) { //nuevo
+	@Override //synchronized?
+	public synchronized void salirDelParque(String puerta) { //nuevo
 		// TODO Auto-generated method stub
+		comprobarAntesDeSalir();
+		
+		salirDelParque(puerta);
 		
 	}
 	
@@ -80,17 +82,23 @@ public class Parque implements IParque{
 		// TODO 
 		// TODO
 	}
-
-	protected void comprobarAntesDeEntrar(){	// TODO
+	//synchronized?
+	protected synchronized void comprobarAntesDeEntrar(){	// TODO
 		//
 		// TODO
 		//
+		if (contadorPersonasTotales<maximoPersonas) {
+			//se puede entrar
+		}
 	}
-
-	protected void comprobarAntesDeSalir(){		// TODO
+	//synchronized?
+	protected synchronized void comprobarAntesDeSalir(){		// TODO
 		//
 		// TODO
 		//
+		if (contadorPersonasTotales!=0) {
+			//se puede salir
+		}
 	}
 
 
