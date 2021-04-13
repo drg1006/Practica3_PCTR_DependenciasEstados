@@ -27,8 +27,11 @@ public class Parque implements IParque{
 			contadoresPersonasPuerta.put(puerta, 0);
 		}
 		
-		// TODO
-		comprobarAntesDeEntrar();
+		try {
+			comprobarAntesDeEntrar();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		
 		// Aumentamos el contador total y el individual
 		contadorPersonasTotales++;		
@@ -49,11 +52,14 @@ public class Parque implements IParque{
 	//
 	@Override //synchronized?
 	public synchronized void salirDelParque(String puerta) { //nuevo
-		// TODO Auto-generated method stub
-		comprobarAntesDeSalir();
+		try {
+			comprobarAntesDeSalir();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		
 		salirDelParque(puerta);
-		
+		//¿Notify?
 	}
 	
 	
@@ -80,25 +86,21 @@ public class Parque implements IParque{
 	protected void checkInvariante() {
 		assert sumarContadoresPuerta() == contadorPersonasTotales : "INV: La suma de contadores de las puertas debe ser igual al valor del contador del parte";
 		// TODO 
+		//assert minimoPersonas :
 		// TODO
+		//assert maximoPersonas
 	}
 	//synchronized?
-	protected synchronized void comprobarAntesDeEntrar(){	// TODO
-		//
-		// TODO
-		//
-		if (contadorPersonasTotales<maximoPersonas) {
-			//se puede entrar
-		}
+	protected synchronized void comprobarAntesDeEntrar() throws InterruptedException{	// TODO
+
+		if (contadorPersonasTotales==maximoPersonas) 
+				wait();
 	}
 	//synchronized?
-	protected synchronized void comprobarAntesDeSalir(){		// TODO
-		//
-		// TODO
-		//
-		if (contadorPersonasTotales!=0) {
-			//se puede salir
-		}
+	protected synchronized void comprobarAntesDeSalir() throws InterruptedException{		// TODO
+
+		if (contadorPersonasTotales==minimoPersonas)
+			wait();
 	}
 
 
