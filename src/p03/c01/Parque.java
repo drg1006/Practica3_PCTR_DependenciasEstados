@@ -9,7 +9,7 @@ public class Parque implements IParque{
 	private int contadorPersonasTotales;
 	private Hashtable<String, Integer> contadoresPersonasPuerta;
 	private int maximoPersonas; //nuevo
-	private int minimoPersonas=0; //nuevo
+	private static final int MINIMOPERSONAS=0; //nuevo
 	
 	public Parque() {	// TODO
 		contadorPersonasTotales = 0;
@@ -48,7 +48,7 @@ public class Parque implements IParque{
 	}
 	
 	// 
-	// TODO Método salirDelParque
+	// TODO MÃ©todo salirDelParque
 	//
 	@Override //synchronized?
 	public synchronized void salirDelParque(String puerta) { //nuevo
@@ -59,7 +59,7 @@ public class Parque implements IParque{
 		}
 		
 		salirDelParque(puerta);
-		//¿Notify?
+		//Â¿Notify?
 	}
 	
 	
@@ -87,6 +87,10 @@ public class Parque implements IParque{
 		assert sumarContadoresPuerta() == contadorPersonasTotales : "INV: La suma de contadores de las puertas debe ser igual al valor del contador del parte";
 		// TODO 
 		//assert minimoPersonas :
+		assert contadoresPersonasPuerta.elements() != null/*; <= MINIMOPERSONAS*/: "INV: El mínimo de personas de las puertas tiene que ser mayor que MINIMOPERSONAS";//new
+		// TODO
+		//assert maximoPersonas
+		assert contadorPersonasTotales <= maximoPersonas: " INV. El numero totales de personas no puede pasar al maximoPersonas";//new
 		// TODO
 		//assert maximoPersonas
 	}
@@ -99,7 +103,7 @@ public class Parque implements IParque{
 	//synchronized?
 	protected synchronized void comprobarAntesDeSalir() throws InterruptedException{		// TODO
 
-		if (contadorPersonasTotales==minimoPersonas)
+		if (contadorPersonasTotales==MINIMOPERSONAS)
 			wait();
 	}
 
