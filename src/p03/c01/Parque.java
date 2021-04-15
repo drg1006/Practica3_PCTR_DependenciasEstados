@@ -39,8 +39,6 @@ public class Parque implements IParque{
 		// Imprimimos el estado del parque
 		imprimirInfo(puerta, "Entrada");
 		
-		
-		// TODO
 		checkInvariante();
 		//Notificamos a todos la entrada de una persona al parque
 		notifyAll();
@@ -65,7 +63,7 @@ public class Parque implements IParque{
 		contadoresPersonasPuerta.put(puerta, contadoresPersonasPuerta.get(puerta)-1);
 		
 		// Imprimimos el estado del parque
-		imprimirInfo(puerta, "Entrada");
+		imprimirInfo(puerta, "Salida");
 	
 	
 		checkInvariante();
